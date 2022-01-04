@@ -11,7 +11,7 @@ using namespace std;
 int map[50][50];
 vector<pair<int,int> >v;
 vector<pair<int,int> >pick;
-queue<pair<pair<int,int>,int> >q;
+queue<tuple<pair<int,int>,int> >q;
 
 int m,n;
 int visit[50][50];
