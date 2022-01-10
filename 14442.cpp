@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <queue>
 using namespace std;
-int map[21][21];
-int visit[21][21][2];
+int map[1000][1000];
+int visit[1000][1000][2];
 int _x[4]={0,0,1,-1};
 int _y[4]={1,-1,0,0};
 queue<vector<int> > q;
@@ -28,23 +28,24 @@ int main(){
 			visit[i][j][0]=99999;
 		}
 	}
+	vector<int> v1;
 	while(!q.empty()){
 		
 		
 		visit[q.front()[0]][q.front()[1]][0]=q.front()[2];
 		visit[q.front()[0]][q.front()[1]][1]=q.front()[3];
-//		for(int i=0;i<N;i++){
-//			for(int j=0;j<M;j++){
-//				printf("%d ",visit[i][j][0]);
-//			}
-//			printf("\n");
-//		}
-//		
-//		printf("\n");
-		if(q.front()[0]==N-1&&q.front()[1]==M-1){
-			if(Min>q.front()[2]){
-				Min=q.front()[2];
+		for(int i=0;i<N;i++){
+			for(int j=0;j<M;j++){
+				printf("%d ",visit[i][j][0]);
 			}
+			printf("\n");
+		}
+		
+		printf("\n");
+		if(q.front()[0]==N-1&&q.front()[1]==M-1){
+			
+			printf("%d",q.front()[2]+1);
+			return 0;
 		}else{
 			for(int i=0;i<4;i++){
 				int xx=_x[i]+q.front()[0];
@@ -54,10 +55,10 @@ int main(){
 					
 					
 					if(map[xx][yy]==1&&q.front()[3]>0){
-						if(visit[xx][yy][0]<q.front()[2]+1&&visit[xx][yy][1]>=q.front()[3]-1){
+						if(visit[xx][yy][0]<=q.front()[2]+1&&visit[xx][yy][1]>=q.front()[3]-1){
 							continue;
 						}
-						vector<int> v1;
+						v1.clear();
 						v1.push_back(xx);
 						v1.push_back(yy);
 						v1.push_back(q.front()[2]+1);
@@ -68,7 +69,7 @@ int main(){
 						if(visit[xx][yy][0]<q.front()[2]+1&&visit[xx][yy][1]>=q.front()[3]){
 							continue;
 						}
-						vector<int> v1;
+						v1.clear();
 						v1.push_back(xx);
 						v1.push_back(yy);
 						v1.push_back(q.front()[2]+1);
@@ -82,10 +83,6 @@ int main(){
 		q.pop();
 		
 	}
-	if(Min==9999){
-		printf("-1");
-	}else{
-			printf("%d",Min+1);
-	}
+	printf("-1");
 
 }
