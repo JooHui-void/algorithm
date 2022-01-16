@@ -37,14 +37,24 @@ int main(){
 		}
 		int time=0;
 		while(!sang.empty()){
-		
-			for(int i=0;i<x;i++){
-				for(int j=0;j<y;j++){
-					printf("%c",map[i][j]);
+
+			
+			while(!fire.empty()&&get<2>(fire.front())==time){
+				int pox=get<0>(fire.front());
+				int poy=get<1>(fire.front());
+				for(int i=0;i<4;i++){
+					int xx=_x[i]+pox;
+					int yy = _y[i]+poy;
+					if(xx>=0&&xx<x&&yy>=0&&yy<y){
+						if(map[xx][yy]=='@'||map[xx][yy]=='.'){
+							map[xx][yy]='*';
+							fire.push(make_tuple(xx,yy,time+1));
+						}
+					}
 				}
-				printf("\n");
+				fire.pop();
 			}
-			printf("\n");
+			
 			while(!sang.empty()&&get<2>(sang.front())==time){
 				int pox=get<0>(sang.front());
 				int poy=get<1>(sang.front());
@@ -68,21 +78,7 @@ int main(){
 				}
 				sang.pop();
 			}
-			while(!fire.empty()&&get<2>(fire.front())==time){
-				int pox=get<0>(fire.front());
-				int poy=get<1>(fire.front());
-				for(int i=0;i<4;i++){
-					int xx=_x[i]+pox;
-					int yy = _y[i]+poy;
-					if(xx>=0&&xx<x&&yy>=0&&yy<y){
-						if(map[xx][yy]=='@'||map[xx][yy]=='.'){
-							map[xx][yy]='*';
-							fire.push(make_tuple(xx,yy,time+1));
-						}
-					}
-				}
-				fire.pop();
-			}
+			
 			time++;
 		}
 		
