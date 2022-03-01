@@ -1,8 +1,7 @@
 #include <stdio.h>
-#define Size 3072 * 2;
-char map[Size][Size];
+char map[3072 +1][3072 * 2+1];
 
-void divide(int x,int y, int size) {
+void divide(int x, int y, int size) {
 	if (size == 3) {
 		map[x][y] = 1;
 		map[x + 1][y - 1] = 1;
@@ -21,11 +20,11 @@ void divide(int x,int y, int size) {
 int main() {
 	int num;
 	scanf("%d", &num);
-	
-	divide(0, num ,num);
-	
-	for (int i = 0; i < num * 2; i++) {
-		for (int j = 0; j < num * 2; j++) {
+
+	divide(0, num, num);
+
+	for (int i = 0; i < num ; i++) {
+		for (int j = 1; j < num * 2; j++) {
 			if (map[i][j] == 1) {
 				printf("*");
 			}
